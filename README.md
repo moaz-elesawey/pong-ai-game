@@ -1,3 +1,2 @@
-# AI Pong Game
+# AI Ping Pong Game
 
-# pong-ai-game
