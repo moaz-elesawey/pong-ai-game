@@ -158,7 +158,7 @@ def main(train=False):
     pygame.display.update()
 
 if __name__ == '__main__':
-    main(train=False)
+    main(train=True)
     
     # with open(f'./data/[{time.time()}]-data-best.pkl', 'wb') as f:
     #     pickle.dump(data, f)
