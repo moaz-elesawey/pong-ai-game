@@ -21,7 +21,8 @@ player2 = Player(side='right')
 
 ball = Ball(WIDTH//2, HEIGHT//2, BALL_RADIUS, WHITE)
 
-data = {'ball_x': [], 'ball_y': [], 'player1_x': [], 'player2_x': [], 'player1_y': [], 'player2_y': []}
+data = {'ball': [], 'player1_y': [], 'player2_y': []}
+trained_model = './models/[1613035926]-model.pkl'
 
 
 def main(train=False):
@@ -101,13 +102,9 @@ def main(train=False):
 
         if started:
 
-            data['ball_x'].append(ball.x)
-            data['ball_y'].append(ball.y)
+            data['ball'].append([ball.y, ball.x])
 
-            data['player1_x'].append(player1.x)
             data['player1_y'].append(player1.y)
-
-            data['player2_x'].append(player2.x)
             data['player2_y'].append(player2.y)
 
             # check for the collisions
@@ -136,11 +133,11 @@ def main(train=False):
                 which_player = 2
             if train:
                 # left player
-                player1.y = test([ball.y], './models/[1612961767]-model-best.pkl')
-                # if keys[pygame.K_w]:
-                #     player1.y -= SPEED 
-                # if keys[pygame.K_s]:
-                #     player1.y += SPEED
+                # player1.y = test([ball.y], './models/[1612961767]-model-best.pkl')
+                if keys[pygame.K_w]:
+                    player1.y -= SPEED 
+                if keys[pygame.K_s]:
+                    player1.y += SPEED
 
                 # right player
                 if keys[pygame.K_UP]:
@@ -150,16 +147,21 @@ def main(train=False):
 
             else:
                 # ai player1
-                player1.y = test([ball.y], './models/[1612961767]-model-best.pkl')
+                player1.y = test([ball.y, ball.x], trained_model)
 
                 # ai player2
-                player2.y = test([ball.y], './models/[1612961767]-model-best.pkl')
+                # player2.y = test([ball.y, ball.x], trained_model)
+                if keys[pygame.K_UP]:
+                    player2.y -= SPEED
+                if keys[pygame.K_DOWN]:
+                    player2.y += SPEED
+
 
     pygame.display.update()
 
 if __name__ == '__main__':
-    main(train=True)
+    main(train=False)
     
-    # with open(f'./data/[{time.time()}]-data-best.pkl', 'wb') as f:
-    #     pickle.dump(data, f)
+    with open(f'./data/[{int(time.time())}]-data.pkl', 'wb') as f:
+        pickle.dump(data, f)
 

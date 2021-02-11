@@ -15,10 +15,10 @@ FONT_BIG = pygame.font.Font('fonts/squada.ttf', 35)
 FONT_SML = pygame.font.Font('fonts/squada.ttf', 30)
 FONT_XSML = pygame.font.Font('fonts/squada.ttf', 10)
 
-FPS = 50
+FPS = 60
 SPEED = 10
 PADD_VAL = 10
 
 BALL_RADIUS = 15
-BALL_SPEED = 30
+BALL_SPEED = 16
 

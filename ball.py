@@ -22,7 +22,7 @@ class Ball:
         self.x += self.move_val_x
         self.y += self.move_val_y
 
-        # if self.x >= WIDTH - self.radius: self.move_val_x = -BALL_SPEED
+        if self.x >= WIDTH - self.radius: self.move_val_x = -BALL_SPEED
         # elif self.x <= self.radius:   self.move_val_x =  BALL_SPEED
 
         if self.y >= HEIGHT - self.radius: self.move_val_y = -BALL_SPEED

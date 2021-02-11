@@ -18,7 +18,7 @@ def train(save=False):
     def clean_data(data_file):
         with open(data_file, 'rb') as f:
             data = pickle.load(f)
-            features =  np.array(data['ball_y'], dtype=np.int32).reshape(-1, 1)
+            features =  np.array(data['ball'], dtype=np.int32)
             targets = np.array(data['player1_y'], dtype=np.int32)
 
         return features, targets
@@ -28,7 +28,7 @@ def train(save=False):
     # print(X.shape, y.shape)
 
     # split the data to train and test
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.2)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=.1)
     # print(X_train.shape, y_train.shape, X_test.shape, y_test.shape)
 
     # train the linear model
@@ -47,7 +47,7 @@ def train(save=False):
     print('Linear Regressor Accuracy Score is {:.3f}'.format(accuracy_score(y_test, np.array(y_pred, dtype=np.int32))))
     print('Linear Regressor Accuracy R2 is {:.3f}'.format(r2_score(y_test, np.array(y_pred, dtype=np.int32))))
 
-    with open(f'./models/[{int(time.time())}]-model-best.pkl', 'wb') as f:
+    with open(f'./models/[{int(time.time())}]-model.pkl', 'wb') as f:
         pickle.dump(linear_reg, f)
 
 def test(sample, model_file):
